@@ -5,7 +5,8 @@
         <p>{{ truncateDescription(item.description) }}</p>
         <h3 class="font-poppins sm:text-lg text-base p-2">Comics Appearances:</h3>
         <p class="font-poppins sm:text-base text-sm p-2">Count: {{ item.comics.available }}</p>
-        <p class="font-poppins sm:text-base text-sm p-2">Latest: {{ latestComic.title }}</p>
+        <p v-if="!fetchingLatestComic" class="font-poppins sm:text-base text-sm p-2">Latest: {{ latestComic.title }}</p>
+        <loading-spinner v-else></loading-spinner>
     </div>
 </template>
 
@@ -37,18 +38,25 @@ export default {
 
         const latestComic = ref({})
 
+        const fetchingLatestComic = ref(false)
+
         const fetchLatestComic = () => {
             const id = props.item.id
 
+            fetchingLatestComic.value = true
+
             if(props.item.comics.available === 0) {
                 latestComic.value = { title: 'No appearances yet!' }
+                fetchingLatestComic.value = false
             } else {
                 axios.get(marvelUrl + '/characters/' + id + '/comics?orderBy=-onsaleDate&apikey=' + marvelKey)
                 .then(response => {
                     latestComic.value = response.data.data.results[0]
+                    fetchingLatestComic.value = false
                 })
                 .catch(error => {
                     console.log(error)
+                    fetchingLatestComic.value = false
                 })
             }
         }
@@ -63,6 +71,7 @@ export default {
         return {
             truncateDescription,
             latestComic,
+            fetchingLatestComic,
         }
     },
 }
