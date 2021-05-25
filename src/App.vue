@@ -15,7 +15,7 @@ import FeaturedComics from './components/MyFeaturedComics.vue'
 
 import axios from 'axios'
 
-import { onMounted, ref, watch } from 'vue'
+import { onMounted, ref, watch, provide } from 'vue'
 
 
   export default {
@@ -53,7 +53,7 @@ import { onMounted, ref, watch } from 'vue'
       }
 
       watch(characters, (newVal) => {
-        if(Object.keys(newVal).length === 0) {
+        if(Object.keys(newVal).length < 4) {
           fetchFeaturedCharacters()
         }
       })
@@ -77,12 +77,17 @@ import { onMounted, ref, watch } from 'vue'
             console.log(error)
           })
       }
+
+      provide('marvelUrl', marvelUrl)
+      provide('marvelKey', marvelKey)
       
       return {
         featuredCharacters: characters,
         latestComics,
+        marvelUrl,
+        marvelKey,
       }
-    }
+    },
   }
 </script>
 
