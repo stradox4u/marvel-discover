@@ -45,7 +45,6 @@ import { onMounted, ref, watch, provide } from 'vue'
             characters.value.forEach(e => {
               e.imageLink = e.thumbnail.path + '/standard_fantastic.' + e.thumbnail.extension
             })
-            console.log(characters.value)
           })
           .catch(error => {
             console.log(error.message)
@@ -71,7 +70,6 @@ import { onMounted, ref, watch, provide } from 'vue'
             latestComics.value.forEach(e => {
               e.imageLink = e.thumbnail.path + '/standard_fantastic.' + e.thumbnail.extension
             })
-            console.log(latestComics.value)
           })
           .catch(error => {
             console.log(error)
