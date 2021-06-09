@@ -1,8 +1,10 @@
 <template>
-    <div class="col-span-1 bg-gray-200 rounded-br-3xl">
+    <div class="col-span-1 bg-gray-200">
         <div class="relative">
             <div class="bg-black bg-opacity-80">
-                <img :src="item.imageLink" :alt="item.name + 'image'" class="w-full h-auto object-cover">
+                <router-link :to="{name: 'character-detail', params: { charId: item.id}}">
+                    <img :src="item.imageLink" :alt="item.name + 'image'" class="w-full h-auto object-cover">
+                </router-link>
             </div>
             <div class="absolute bottom-0 left-0 bg-gray-500 bg-opacity-60 w-full">
                 <h3 class="font-poppins font-semibold sm:text-lg text-base text-center text-white uppercase p-2">{{ item.name }}</h3>
@@ -12,11 +14,11 @@
         <div class="w-full bg-mf-ruby flex flex-col items-center py-4 rounded-br-3xl">
             <h3 class="font-poppins sm:text-lg text-base p-2 uppercase text-center">Comics Appearances:</h3>
             <div class="flex flex-row justify-between w-full">
-                <span class="flex flex-col space-y-2 items-center px-4 border-r border-white w-full">
+                <span class="flex flex-col space-y-2 items-center px-2 border-r border-white w-full">
                     <p class="font-poppins sm:text-base text-sm text-gray-200">Count</p>
                     <p class="font-poppins sm:text-base text-sm font-semibold text-white">{{ item.comics.available }}</p>
                 </span>
-                <span class="flex flex-col space-y-2 items-center px-4 w-full">
+                <span class="flex flex-col space-y-2 items-center px-2 w-full">
                     <p class="font-poppins sm:text-base text-sm text-gray-200">Latest</p>
                     <p v-if="!fetchingLatestComic" class="font-poppins sm:text-base text-sm font-semibold text-white">{{ latestComic.date }}</p>
                     <loading-spinner v-else></loading-spinner>
@@ -28,8 +30,9 @@
 
 <script>
 import axios from 'axios'
+import { useStore } from 'vuex'
 
-import { ref, onMounted, inject, watch } from 'vue'
+import { ref, onMounted } from 'vue'
 
 
 export default {
@@ -40,6 +43,8 @@ export default {
         },
     },
     setup(props) {
+        const store = useStore()
+        
         const truncateDescription = (str) => {
             if(str.length === 0) {
                 return 'No supplied description ...'
@@ -84,8 +89,8 @@ export default {
             fetchLatestComic()
         })
 
-        const marvelUrl = inject('marvelUrl')
-        const marvelKey = inject('marvelKey')
+        const marvelUrl = store.getters.getMarvelUrl
+        const marvelKey = store.getters.getMarvelKey
 
         return {
             truncateDescription,

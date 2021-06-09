@@ -5,12 +5,14 @@ import './index.css'
 import LoadingSpinner from './components/UI/MyLoadingSpinner.vue'
 
 import router from './router.js'
+import store from './store/index.js'
 
 
 
 const app = createApp(App)
 
 app.use(router)
+app.use(store)
 
 app.component('loading-spinner', LoadingSpinner)
 
