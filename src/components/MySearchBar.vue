@@ -1,9 +1,9 @@
 <template>
-    <div class="inline-flex space-x-0 mb-4">
+    <form @submit.prevent="runSearch" class="inline-flex space-x-0 mb-4">
         <input v-model="searchTerm" type="text" placeholder="Search for a character" class="flex-grow p-2 focus:outline-none border border-gray-300 rounded-l-md" />
-        <img @click="runSearch" 
-            :src="searchIcon" alt="search-icon" class="flex-shrink h-12 bg-mf-cblue p-2 rounded-r-md cursor-pointer hover:bg-gray-400">
-    </div>
+        <input type="image" 
+            :src="searchIcon" alt="Submit" class="flex-shrink h-12 bg-mf-cblue p-2 rounded-r-md cursor-pointer hover:bg-gray-400">
+    </form>
 </template>
 
 <script>
@@ -24,15 +24,17 @@ export default {
         const router = useRouter()
 
         const runSearch = () => {
-            store.dispatch('search/runSearchQuery', { searchTerm })
+            store.dispatch('search/runSearchQuery', { searchTerm: searchTerm.value })
 
             router.push({ name: 'search-results' })
+
+            searchTerm.value = ''
         }
 
         return {
             searchTerm,
             searchIcon,
-            runSearch
+            runSearch,
         }
     },
 }

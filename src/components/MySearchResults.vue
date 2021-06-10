@@ -22,12 +22,13 @@ export default {
     const store = useStore()
 
     const results = computed(() => {
-      return store.getters['/search/getSearchResults']
+      return store.getters['search/getSearchResults']
     })
 
     const isSearching = computed(() => {
-      return store.getters['/search/getSearchingState']
+      return store.getters['search/getSearchingState']
     })
+    
 
     return {
       results,

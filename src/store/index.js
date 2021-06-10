@@ -23,7 +23,7 @@ const store = createStore({
         getMarvelKey(state) {
             return state.marvelKey
         }
-    }
+    },
 })
 
 export default store

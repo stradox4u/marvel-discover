@@ -45,9 +45,9 @@ export default {
 		const store = useStore()
 
     const charDetails = computed(() => {
-			const featured = store.getters['character/getFeaturedCharacters']
+			const allChars = store.getters['character/getFeaturedCharacters'].concat(store.getters['search/getSearchResults'])
 
-			return featured.find(el => el.id === parseInt(route.params.charId))
+			return allChars.find(el => el.id === parseInt(route.params.charId))
 		})
 
 		const description = computed(() => {

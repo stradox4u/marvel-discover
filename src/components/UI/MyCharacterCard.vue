@@ -30,7 +30,7 @@
 
 <script>
 import { useStore } from 'vuex'
-
+import { useRoute } from 'vue-router'
 import { ref, onMounted, computed, watch } from 'vue'
 
 
@@ -40,6 +40,10 @@ export default {
             type: Object,
             required: true
         },
+        currRoute: {
+            type: String,
+            required: true,
+        }
     },
     setup(props) {
         const store = useStore()
@@ -49,16 +53,25 @@ export default {
                 return 'No supplied description ...'
             } else if(str.length > 50) {
                 return str.substring(0, 72) + ' ...'
-            } else if(str === NULL) {
+            } else if(str === null) {
                 return 'No description available ...'
             } else {
                 return str
             }
         }
+        
+        const route = useRoute()
+
+        const curChars = computed(() => {
+            if(props.currRoute === 'landing') {
+                return store.getters['character/getFeaturedCharacters']
+            } else if(props.currRoute === 'searching') {
+                return store.getters['search/getSearchResults']
+            }
+        })
 
         const latestComic = computed(() => {
-            const allChars = store.getters['character/getFeaturedCharacters']
-            const relevantChar = allChars.find(el => el.id == props.item.id)
+            const relevantChar = curChars.value.find(el => el.id == props.item.id)
 
             if(!relevantChar.latestComic) {
                 return { date: null }
@@ -74,7 +87,11 @@ export default {
 
             fetchingLatestComic.value = true
 
-            store.dispatch('character/loadLatestComic', { id: id, available: props.item.comics.available})
+            if(route.name === 'search-results') {
+                store.dispatch('search/loadLatestComic', { id: id, available: props.item.comics.available })
+            } else {
+                store.dispatch('character/loadLatestComic', { id: id, available: props.item.comics.available })
+            }
         }
 
 

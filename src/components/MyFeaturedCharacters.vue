@@ -1,13 +1,19 @@
 <template>
     <h2 class="font-montserrat sm:text-lg text-sm uppercase font-semibold">{{ title }}</h2>
     <ul v-if="!loadingData" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <character-card v-for="item in featuredItems" :key="item.id" :item="item" class="transform hover:scale-105"></character-card>
+        <character-card v-for="item in featuredItems" :key="item.id"
+            :currRoute="whichRoute"
+            :item="item" class="transform hover:scale-105"
+            >
+        </character-card>
     </ul>
     <loading-spinner v-else></loading-spinner>
 </template>
 
 
 <script>
+import { computed } from 'vue'
+
 import CharacterCard from './UI/MyCharacterCard.vue'
 
 
@@ -29,8 +35,18 @@ export default {
             required: true,
         }
     },
-    setup() {
-        
+    setup(props) {
+        const whichRoute = computed(() => {
+            if(props.title === 'Featured Characters') {
+                return 'landing'
+            } else {
+                return 'searching'
+            }
+        })
+
+        return {
+            whichRoute,
+        }
     },
 }
 </script>

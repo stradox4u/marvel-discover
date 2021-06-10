@@ -26,6 +26,7 @@ export default {
 	async fetchLatestComic(state, payload) {
 		const marvelUrl = payload.marvelUrl
 		const marvelKey = payload.marvelKey
+
 		const relevantChar = state.featuredCharacters.find(el => el.id === parseInt(payload.id))
 
 		if (payload.available === 0) {
