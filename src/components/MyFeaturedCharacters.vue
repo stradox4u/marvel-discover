@@ -1,5 +1,5 @@
 <template>
-    <h2 class="font-montserrat sm:text-lg text-sm uppercase font-semibold">Featured Characters</h2>
+    <h2 class="font-montserrat sm:text-lg text-sm uppercase font-semibold">{{ title }}</h2>
     <ul v-if="!loadingData" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <character-card v-for="item in featuredItems" :key="item.id" :item="item" class="transform hover:scale-105"></character-card>
     </ul>
@@ -22,6 +22,10 @@ export default {
         },
         loadingData: {
             type: Boolean,
+            required: true,
+        },
+        title: {
+            type: String,
             required: true,
         }
     },

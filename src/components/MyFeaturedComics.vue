@@ -4,7 +4,7 @@
   </h2>
   <ul
     v-if="!loadingComics"
-    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
+    class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4"
   >
     <comic-card
       v-for="comic in featuredComics"
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import ComicCard from "./MyComicCard.vue"
+import ComicCard from "./UI/MyComicCard.vue"
 
 export default {
   components: {

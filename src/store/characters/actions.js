@@ -12,5 +12,5 @@ export default {
             marvelUrl: rootGetters.getMarvelUrl,
             marvelKey: rootGetters.getMarvelKey,
         })
-    }
+    },
 }

@@ -2,11 +2,13 @@ import { createStore } from 'vuex'
 
 import characterModule from './characters/index.js'
 import comicModule from './comics/index.js'
+import searchModule from './search/index.js'
 
 const store = createStore({
     modules: {
         character: characterModule,
         comic: comicModule,
+        search: searchModule,
     },
     state() {
         return {

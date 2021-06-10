@@ -2,6 +2,7 @@
   <featured-characters
     :featuredItems="featuredCharacters"
     :loadingData="charactersLoading"
+    :title="'Featured Characters'"
   ></featured-characters>
   <featured-comics
     :featuredComics="latestComics"
@@ -34,7 +35,7 @@ export default {
     })
 
     watch(characters, (newVal) => {
-      if (Object.keys(newVal).length < 4) {
+      if (Object.keys(newVal).length < 8) {
         store.dispatch('character/loadFeaturedCharacters')
       }
     })

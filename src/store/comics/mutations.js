@@ -17,7 +17,7 @@ export default {
 
 		try {
 			const response = await axios.get(marvelUrl + "/comics?orderBy=-onsaleDate&dateRange=" +
-				aMonthBack + "," + today + "&limit=4&apikey=" + marvelKey)
+				aMonthBack + "," + today + "&limit=8&apikey=" + marvelKey)
 
 			let comicResults = response.data.data.results
 
