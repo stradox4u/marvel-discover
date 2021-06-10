@@ -10,12 +10,11 @@
 </template>
 
 <script>
-import FeaturedCharacters from "./MyFeaturedCharacters.vue";
+import FeaturedCharacters from "./MyFeaturedCharacters.vue"
 import FeaturedComics from "./MyFeaturedComics.vue"
 
-import axios from "axios"
 
-import { onMounted, watch, computed } from "vue"
+import { watch, computed } from "vue"
 import { useStore } from "vuex"
 
 export default {
@@ -24,29 +23,19 @@ export default {
     FeaturedComics,
   },
   setup() {
-    const store = useStore();
+    const store = useStore()
 
     const characters = computed(() => {
       return store.getters['character/getFeaturedCharacters']
-    })
-
-
-    onMounted(() => {
-      fetchFeaturedCharacters()
-      fetchLatestComics()
     })
 
     const charactersLoading = computed(() => {
       return store.getters['character/getCharactersLoadingState']
     })
 
-    const fetchFeaturedCharacters = () => {
-      store.dispatch('character/loadFeaturedCharacters')
-    }
-
     watch(characters, (newVal) => {
       if (Object.keys(newVal).length < 4) {
-        fetchFeaturedCharacters()
+        store.dispatch('character/loadFeaturedCharacters')
       }
     })
 
@@ -58,16 +47,12 @@ export default {
       return store.getters['comic/getComicsLoadingState']
     })
 
-    const fetchLatestComics = () => {
-      store.dispatch('comic/loadLatestComics')
-    };
-
     return {
       featuredCharacters: characters,
       latestComics,
       charactersLoading,
       comicsLoading,
-    };
+    }
   },
-};
+}
 </script>

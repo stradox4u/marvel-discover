@@ -3,28 +3,41 @@
     <my-header>Marvel Discover</my-header>
     <my-search-bar></my-search-bar>
     <router-view></router-view>
+    <my-footer></my-footer>
   </div>
 </template>
 
 <script>
 import MyHeader from './components/UI/MyHeader.vue'
 import MySearchBar from './components/MySearchBar.vue'
+import MyFooter from './components/UI/MyFooter.vue'
 
 
-import { provide } from 'vue'
+import { onMounted } from 'vue'
+import { useStore } from 'vuex'
 
 
   export default {
     components: {
       MyHeader,
       MySearchBar,
+      MyFooter,
     },
     setup() {
-      const marvelUrl = import.meta.env.VITE_MARVEL_URL
-      const marvelKey = import.meta.env.VITE_MARVEL_KEY      
+      const store = useStore()
 
-      provide('marvelUrl', marvelUrl)
-      provide('marvelKey', marvelKey)
+      const fetchFeaturedCharacters = () => {
+        store.dispatch('character/loadFeaturedCharacters')
+      }
+
+      const fetchLatestComics = () => {
+        store.dispatch('comic/loadLatestComics')
+      }
+
+      onMounted(() => {
+        fetchFeaturedCharacters()
+        fetchLatestComics()
+      })
     },
   }
 </script>

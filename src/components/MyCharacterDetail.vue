@@ -1,35 +1,27 @@
 <template>
-    Character Details go here!!!
+	{{ charDetails.latestComic.name }}
 </template>
 
 <script>
-import { ref, onMounted, inject } from 'vue'
+import { computed } from 'vue'
 import { useRoute } from 'vue-router'
-
-import axios from 'axios'
+import { useStore } from 'vuex'
 
 
 export default {
-    setup() {
-        const route = useRoute()
+  setup() {
+    const route = useRoute()
+		const store = useStore()
 
-        const charDetails = ref({})
+    const charDetails = computed(() => {
+			const featured = store.getters['character/getFeaturedCharacters']
 
-        onMounted(() => {
-            const id = route.params.charId
-            axios.get(marvelUrl + '/characters/' + id + '?apikey=' + marvelKey)
-                .then(response => {
-                    charDetails.value = response.data.data.results[0]
-                    console.log(charDetails.value)
-                })
-                .catch(error => {
-                    console.log(error)
-                })
-        })
+			return featured.find(el => el.id === parseInt(route.params.charId))
+		})
 
-        const marvelUrl = inject('marvelUrl')
-        const marvelKey = inject('marvelKey')
-    },
-    
+		return {
+			charDetails,
+		}
+  },
 }
 </script>

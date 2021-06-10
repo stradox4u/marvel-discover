@@ -29,10 +29,9 @@
 </template>
 
 <script>
-import axios from 'axios'
 import { useStore } from 'vuex'
 
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed, watch } from 'vue'
 
 
 export default {
@@ -57,8 +56,17 @@ export default {
             }
         }
 
-        const latestComic = ref({})
+        const latestComic = computed(() => {
+            const allChars = store.getters['character/getFeaturedCharacters']
+            const relevantChar = allChars.find(el => el.id == props.item.id)
 
+            if(!relevantChar.latestComic) {
+                return { date: null }
+            } else {
+                return relevantChar.latestComic
+            }
+            
+        })
         const fetchingLatestComic = ref(false)
 
         const fetchLatestComic = () => {
@@ -66,31 +74,21 @@ export default {
 
             fetchingLatestComic.value = true
 
-            if(props.item.comics.available === 0) {
-                latestComic.value = { date: 'None yet!' }
-                fetchingLatestComic.value = false
-            } else {
-                axios.get(marvelUrl + '/characters/' + id + '/comics?orderBy=-onsaleDate&apikey=' + marvelKey)
-                .then(response => {
-                    const date = response.data.data.results[0].dates
-                    const onSale = date.filter(el => el.type === 'onsaleDate')
-                    const onSaleDate = onSale[0].date.split('T')
-                    latestComic.value = { date: onSaleDate[0] }
-                    fetchingLatestComic.value = false
-                })
-                .catch(error => {
-                    console.log(error)
-                    fetchingLatestComic.value = false
-                })
-            }
+            store.dispatch('character/loadLatestComic', { id: id, available: props.item.comics.available})
         }
+
+
+        watch(latestComic, (newVal) => {
+            if(newVal) {
+                if(newVal.value !== null) {
+                    fetchingLatestComic.value = false
+                }
+            }
+        })
 
         onMounted(() => {
             fetchLatestComic()
         })
-
-        const marvelUrl = store.getters.getMarvelUrl
-        const marvelKey = store.getters.getMarvelKey
 
         return {
             truncateDescription,
