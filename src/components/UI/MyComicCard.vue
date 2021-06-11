@@ -1,5 +1,6 @@
 <template>
   <div class="col-span-1 bg-gray-200 rounded-br-lg">
+    <!-- Image -->
     <router-link :to="{name: 'comic-detail', params: { comId: comic.id } }">
       <img
         :src="comic.imageLink"
@@ -10,6 +11,7 @@
     <h3 class="font-poppins sm:text-lg text-base bg-mf-ruby p-2">
       {{ title }}
     </h3>
+    <!-- Buy button -->
     <router-link :to="{ name: 'comic-detail', params: { comId: comic.id } }"
         class="mt-4 full"
     >
@@ -29,6 +31,7 @@ export default {
     },
   },
   setup(props) {
+    // Truncate string if too long
     const title = computed(() => {
 			if(props.comic.title.length <= 22) {
 				return props.comic.title

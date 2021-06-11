@@ -1,16 +1,19 @@
 <template>
     <div class="col-span-1">
         <div class="relative">
+            <!-- Image -->
             <div class="bg-black bg-opacity-80">
                 <router-link :to="{name: 'character-detail', params: { charId: item.id}}">
                     <img :src="item.imageLink" :alt="item.name + 'image'" class="w-full h-auto object-cover">
                 </router-link>
             </div>
+            <!-- Description -->
             <div class="absolute bottom-0 left-0 bg-gray-500 bg-opacity-60 w-full">
                 <h3 class="font-poppins font-semibold sm:text-lg text-base text-center text-white uppercase p-2">{{ item.name }}</h3>
                 <p class="text-center text-gray-200">{{ truncateDescription(item.description) }}</p>
             </div>
         </div>
+        <!-- Appearances -->
         <div class="w-full bg-mf-ruby flex flex-col items-center py-4">
             <h3 class="font-poppins sm:text-lg text-base p-2 uppercase text-center">Comics Appearances:</h3>
             <div class="flex flex-row justify-between w-full">
@@ -24,6 +27,7 @@
                     <loading-spinner v-else></loading-spinner>
                 </span>
             </div>
+            <!-- Details Button -->
             <router-link :to="{ name: 'character-detail', params: { charId: item.id } }"
                 class="mt-4 w-9/12"
             >
@@ -67,6 +71,7 @@ export default {
         
         const route = useRoute()
 
+        // Fetch current characters from store
         const curChars = computed(() => {
             if(props.currRoute === 'landing') {
                 return store.getters['character/getFeaturedCharacters']
@@ -75,6 +80,7 @@ export default {
             }
         })
 
+        // Process the latest comic
         const latestComic = computed(() => {
             const relevantChar = curChars.value.find(el => el.id == props.item.id)
 
@@ -87,6 +93,7 @@ export default {
         })
         const fetchingLatestComic = ref(false)
 
+        // Fetch the latest comic for this character
         const fetchLatestComic = () => {
             const id = props.item.id
 
@@ -99,7 +106,7 @@ export default {
             }
         }
 
-
+        // Process the variable for showing the loading spinner
         watch(latestComic, (newVal) => {
             if(newVal) {
                 if(newVal.value !== null) {
@@ -108,6 +115,7 @@ export default {
             }
         })
 
+        // Only load the latest comic if there's none in the store
         onMounted(() => {
             if(!Object.keys(props.item).includes('latestComic')) {
                 fetchLatestComic()
