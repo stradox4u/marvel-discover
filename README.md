@@ -8,3 +8,5 @@
     - VITE_MARVEL_URL
     - The key is your personal id token from the marvel api, and the url is the base url for the marvel api.
    - To run locally, run npm run dev
+
+  *The app is deployed at https://stradox-marvel-finder.netlify.app*
