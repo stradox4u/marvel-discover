@@ -1,6 +1,7 @@
 <template>
   <div class="container mx-auto flex flex-col">
     <my-header>Marvel Discover</my-header>
+    <home-button></home-button>
     <my-search-bar></my-search-bar>
     <router-view></router-view>
     <my-footer></my-footer>
@@ -11,6 +12,7 @@
 import MyHeader from './components/UI/MyHeader.vue'
 import MySearchBar from './components/MySearchBar.vue'
 import MyFooter from './components/UI/MyFooter.vue'
+import HomeButton from './components/UI/MyHomeButton.vue'
 
 
 import { onMounted } from 'vue'
@@ -22,6 +24,7 @@ import { useStore } from 'vuex'
       MyHeader,
       MySearchBar,
       MyFooter,
+      HomeButton,
     },
     setup() {
       const store = useStore()

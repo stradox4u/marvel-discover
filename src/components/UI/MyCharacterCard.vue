@@ -1,5 +1,5 @@
 <template>
-    <div class="col-span-1 bg-gray-200">
+    <div class="col-span-1">
         <div class="relative">
             <div class="bg-black bg-opacity-80">
                 <router-link :to="{name: 'character-detail', params: { charId: item.id}}">
@@ -11,7 +11,7 @@
                 <p class="text-center text-gray-200">{{ truncateDescription(item.description) }}</p>
             </div>
         </div>
-        <div class="w-full bg-mf-ruby flex flex-col items-center py-4 rounded-br-3xl">
+        <div class="w-full bg-mf-ruby flex flex-col items-center py-4">
             <h3 class="font-poppins sm:text-lg text-base p-2 uppercase text-center">Comics Appearances:</h3>
             <div class="flex flex-row justify-between w-full">
                 <span class="flex flex-col space-y-2 items-center px-2 border-r border-white w-full">
@@ -24,6 +24,11 @@
                     <loading-spinner v-else></loading-spinner>
                 </span>
             </div>
+            <router-link :to="{ name: 'character-detail', params: { charId: item.id } }"
+                class="mt-4 w-9/12"
+            >
+                <base-button class="bg-mf-pumpkin w-full">Learn More</base-button>
+            </router-link>
         </div>
     </div>
 </template>
@@ -104,7 +109,9 @@ export default {
         })
 
         onMounted(() => {
-            fetchLatestComic()
+            if(!Object.keys(props.item).includes('latestComic')) {
+                fetchLatestComic()
+            }
         })
 
         return {

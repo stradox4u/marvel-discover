@@ -15,7 +15,7 @@ import FeaturedCharacters from "./MyFeaturedCharacters.vue"
 import FeaturedComics from "./MyFeaturedComics.vue"
 
 
-import { watch, computed } from "vue"
+import { watch, computed, onMounted } from "vue"
 import { useStore } from "vuex"
 
 export default {
@@ -35,7 +35,7 @@ export default {
     })
 
     watch(characters, (newVal) => {
-      if (Object.keys(newVal).length < 8) {
+      if (newVal.length < 8) {
         store.dispatch('character/loadFeaturedCharacters')
       }
     })
@@ -46,6 +46,12 @@ export default {
 
     const comicsLoading = computed(() => {
       return store.getters['comic/getComicsLoadingState']
+    })
+
+    onMounted(() => {
+      if(characters.value.length < 8) {
+        store.dispatch('character/loadFeaturedCharacters')
+      }
     })
 
     return {

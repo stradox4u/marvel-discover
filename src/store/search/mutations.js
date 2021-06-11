@@ -16,6 +16,12 @@ export default {
     state.searchResults = searchResults
 
     state.searchingState = false
+
+    if (state.searchResults.length === 0) {
+      state.noResultsFound = true
+    } else {
+      state.noResultsFound = false
+    }
   },
   async fetchLatestComic(state, payload) {
     const marvelUrl = payload.marvelUrl

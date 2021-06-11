@@ -20,7 +20,7 @@
 		</template>
 
 		<template #halo>
-				<h4 class="font-montserrat font-semibold sm:text-sm text-xs text-gray-200">Events:</h4>
+				<h4 class="font-montserrat font-semibold sm:text-sm text-xs ml-2 text-gray-200">Events:</h4>
 				<div class="inline-flex flex-wrap">
 					<p v-for="(event, index) in events" :key="index" class="font-poppins sm:text-sm text-xs m-2 text-gray-200" :class="{'border-l': index > 0, 'border-gray-700': index > 0, 'pl-2': index > 0 }">{{ event }}</p>
 				</div>		

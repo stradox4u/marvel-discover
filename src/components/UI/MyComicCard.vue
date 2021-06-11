@@ -1,15 +1,20 @@
 <template>
   <div class="col-span-1 bg-gray-200 rounded-br-lg">
-    <router-link :to="{name: 'comic-detail', params: { comId: comic.id}}">
+    <router-link :to="{name: 'comic-detail', params: { comId: comic.id } }">
       <img
         :src="comic.imageLink"
         :alt="comic.title + 'image'"
         class="w-full h-auto object-cover"
       />
     </router-link>
-    <h3 class="font-poppins sm:text-lg text-base bg-mf-pumpkin p-2">
+    <h3 class="font-poppins sm:text-lg text-base bg-mf-ruby p-2">
       {{ title }}
     </h3>
+    <router-link :to="{ name: 'comic-detail', params: { comId: comic.id } }"
+        class="mt-4 full"
+    >
+        <base-button class="bg-mf-pumpkin w-full">Buy</base-button>
+    </router-link>
   </div>
 </template>
 

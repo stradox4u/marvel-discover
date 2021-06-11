@@ -38,10 +38,13 @@
         </h4>
         <p class="font-poppins sm:text-sm text-xs">{{ comicDetail.pageCount }}</p>
       </span>
+      <a :href="purchaseLink">
+        <base-button class="mt-4 bg-mf-pumpkin w-9/12">Buy Now</base-button>
+      </a>
     </template>
 
     <template #halo>
-				<h4 class="font-montserrat font-semibold sm:text-sm text-xs text-gray-200">Creators:</h4>
+				<h4 class="font-montserrat font-semibold ml-2 sm:text-sm text-xs text-gray-200">Creators:</h4>
 				<div class="inline-flex flex-wrap">
 					<p v-for="(creator, index) in creators" 
             :key="index" 
@@ -91,11 +94,17 @@ export default {
       return comicDetail.value.creators.items.slice(0, 5)
     })
 
+    const purchaseLink = computed(() => {
+      const detailLink = comicDetail.value.urls.find(el => el.type === 'detail')
+      return detailLink.url
+    })
+
     return {
       comicDetail,
       saleDate,
       focDate,
-      creators
+      creators,
+      purchaseLink,
     }
   },
 }
