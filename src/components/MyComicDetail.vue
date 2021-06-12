@@ -62,6 +62,7 @@
 import { computed, onBeforeMount } from "vue"
 import { useStore } from "vuex"
 import { useRoute } from "vue-router"
+import axios from 'axios'
 
 import BaseDetailCard from "./UI/MyBaseDetailCard.vue"
 
@@ -70,15 +71,29 @@ export default {
     BaseDetailCard,
   },
   setup() {
-    const store = useStore();
-    const route = useRoute();
+    const store = useStore()
+    const route = useRoute()
 
     const allComics = computed(() => {
       return store.getters["comic/getLatestComics"]
     })
 
     const comicDetail = computed(() => {
-      return allComics.value.find((el) => el.id === parseInt(route.params.comId))
+      let comic
+      try {
+        comic = allComics.value.find((el) => el.id === parseInt(route.params.comId))
+      } catch {
+        axios.get(store.getMarvelUrl + '/comics/' + route.params.comId + '?apikey=' + store.getMarvelKey)
+        .then(response => {
+          console.log(response)
+          comic = response.data.data.results
+          comic.imageLink = comic.thumbnail.path + '/detail.' + comic.thumbnail.extension
+        })
+        .catch(err => {
+          console.error(err)
+        })
+      }
+      return comic
     })
 
     const saleDate = computed(() => {

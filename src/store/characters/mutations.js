@@ -13,7 +13,7 @@ export default {
 			let charsReturned = response.data.data.results
 
 			charsReturned.forEach(e => {
-				e.imageLink = e.thumbnail.path + '/standard_fantastic.' + e.thumbnail.extension
+				e.imageLink = e.thumbnail.path + '/detail.' + e.thumbnail.extension
 			})
 
 			state.featuredCharacters = charsReturned

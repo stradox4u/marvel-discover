@@ -23,7 +23,7 @@ export default {
 
 			comicResults.forEach((e) => {
 				e.imageLink =
-					e.thumbnail.path + "/standard_fantastic." + e.thumbnail.extension
+					e.thumbnail.path + "/detail." + e.thumbnail.extension
 			})
 			state.latestComics = comicResults
 			state.comicsLoading = false
