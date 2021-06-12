@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full flex sm:flex-row flex-col gap-0 bg-gray-200">
+  <div class="flex sm:flex-row flex-col gap-0 bg-gray-200">
     <div class="w-full">
       <slot name="image"></slot>
     </div>

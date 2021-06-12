@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto flex flex-col">
+  <div class="sm:w-9/12 w-10/12 mx-auto flex flex-col">
     <my-header>Marvel Discover</my-header>
     <home-button></home-button>
     <my-search-bar></my-search-bar>

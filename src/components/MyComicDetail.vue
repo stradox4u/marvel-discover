@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import { computed } from "vue"
+import { computed, onBeforeMount } from "vue"
 import { useStore } from "vuex"
 import { useRoute } from "vue-router"
 
@@ -73,9 +73,12 @@ export default {
     const store = useStore();
     const route = useRoute();
 
+    const allComics = computed(() => {
+      return store.getters["comic/getLatestComics"]
+    })
+
     const comicDetail = computed(() => {
-      const allComics = store.getters["comic/getLatestComics"]
-      return allComics.find((el) => el.id === parseInt(route.params.comId))
+      return allComics.value.find((el) => el.id === parseInt(route.params.comId))
     })
 
     const saleDate = computed(() => {
