@@ -38,7 +38,7 @@
         </h4>
         <p class="font-poppins sm:text-sm text-xs">{{ comicDetail.pageCount }}</p>
       </span>
-      <a :href="purchaseLink">
+      <a :href="purchaseLink" class="mx-auto">
         <base-button class="mt-4 bg-mf-pumpkin w-9/12">Buy Now</base-button>
       </a>
     </template>
