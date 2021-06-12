@@ -3,8 +3,10 @@
         <div class="relative">
             <!-- Image -->
             <div class="bg-black bg-opacity-80">
-                <router-link :to="{name: 'character-detail', params: { charId: item.id}}">
-                    <img :src="item.imageLink" :alt="item.name + 'image'" class="w-full h-auto object-cover">
+                <router-link :to="{name: 'character-detail', params: { charId: item.id}}"
+                    class="relative py-48 block"
+                >
+                    <img :src="item.imageLink" :alt="item.name + 'image'" class="w-full h-full absolute top-0 object-cover">
                 </router-link>
             </div>
             <!-- Description -->

@@ -38,7 +38,7 @@
         </h4>
         <p class="font-poppins sm:text-sm text-xs">{{ comicDetail.pageCount }}</p>
       </span>
-      <a :href="purchaseLink" class="mx-auto">
+      <a :href="purchaseLink">
         <base-button class="mt-4 bg-mf-pumpkin w-9/12">Buy Now</base-button>
       </a>
     </template>
@@ -79,21 +79,7 @@ export default {
     })
 
     const comicDetail = computed(() => {
-      let comic
-      try {
-        comic = allComics.value.find((el) => el.id === parseInt(route.params.comId))
-      } catch {
-        axios.get(store.getMarvelUrl + '/comics/' + route.params.comId + '?apikey=' + store.getMarvelKey)
-        .then(response => {
-          console.log(response)
-          comic = response.data.data.results
-          comic.imageLink = comic.thumbnail.path + '/detail.' + comic.thumbnail.extension
-        })
-        .catch(err => {
-          console.error(err)
-        })
-      }
-      return comic
+      return allComics.value.find((el) => el.id === parseInt(route.params.comId))
     })
 
     const saleDate = computed(() => {
