@@ -13,6 +13,9 @@
       <span class="p-2 flex sm:flex-col flex-row flex-wrap gap-2 justify-between">
         <slot name="details"></slot>
       </span>
+      <span class="p-2">
+        <slot name="button"></slot>
+      </span>
     </div>
   </div>
   <span class="p-2 bg-mf-ruby w-full">

@@ -1,7 +1,9 @@
 <template>
 	<base-detail-card>
 		<template #image>
-			<img :src="charDetails.imageLink" :alt="charDetails.name + 'image'" class="w-full h-auto object-cover">
+			<div class="relative w-full sm:py-72 py-48">
+				<img :src="charDetails.imageLink" :alt="charDetails.name + 'image'" class="absolute top-0 w-full h-full object-cover">
+			</div>
 		</template>
 
 		<template #header>

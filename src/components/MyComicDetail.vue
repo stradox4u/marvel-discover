@@ -1,11 +1,13 @@
 <template>
   <base-detail-card>
     <template #image>
-      <img
-        :src="comicDetail.imageLink"
-        :alt="comicDetail.title + 'image'"
-        class="w-full h-auto object-cover"
-      />
+      <div class="relative w-full sm:py-72 py-48">
+        <img
+          :src="comicDetail.imageLink"
+          :alt="comicDetail.title + 'image'"
+          class="w-full h-full absolute top-0 object-cover"
+        />
+      </div>
     </template>
 
     <template #header>
@@ -38,8 +40,10 @@
         </h4>
         <p class="font-poppins sm:text-sm text-xs">{{ comicDetail.pageCount }}</p>
       </span>
+    </template>
+    <template #button>
       <a :href="purchaseLink">
-        <base-button class="mt-4 bg-mf-pumpkin w-9/12">Buy Now</base-button>
+        <base-button class="mt-4 bg-mf-pumpkin w-9/12 block">Buy Now</base-button>
       </a>
     </template>
 
