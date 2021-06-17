@@ -10,7 +10,7 @@
       v-for="comic in featuredComics"
       :key="comic.id"
       :comic="comic"
-      class="transform hover:scale-105"
+      class="transform hover:scale-105 my-auto"
     ></comic-card>
   </ul>
   <loading-spinner v-else></loading-spinner>

@@ -1,5 +1,5 @@
 <template>
-  <div class="col-span-1 bg-gray-200 rounded-br-lg">
+  <div class="col-span-1 bg-gray-200 rounded-br-lg h-full flex flex-col space-y-0 justify-items-stretch">
     <!-- Image -->
     <router-link :to="{name: 'comic-detail', params: { comId: comic.id } }">
       <img
@@ -8,13 +8,11 @@
         class="w-full h-auto object-cover"
       />
     </router-link>
-    <h3 class="font-poppins sm:text-lg text-base bg-mf-ruby p-2">
+    <h3 class="font-poppins sm:text-lg text-base bg-mf-ruby p-2 flex-grow">
       {{ title }}
     </h3>
     <!-- Buy button -->
-    <router-link :to="{ name: 'comic-detail', params: { comId: comic.id } }"
-        class="mt-4 full"
-    >
+    <router-link :to="{ name: 'comic-detail', params: { comId: comic.id } }">
         <base-button class="bg-mf-pumpkin w-full">Buy</base-button>
     </router-link>
   </div>
@@ -33,10 +31,10 @@ export default {
   setup(props) {
     // Truncate string if too long
     const title = computed(() => {
-			if(props.comic.title.length <= 22) {
+			if(props.comic.title.length <= 15) {
 				return props.comic.title
 			} else {
-				return props.comic.title.substring(0, 21) + ' ...'
+				return props.comic.title.substring(0, 14) + ' ...'
 			}
 		})
 
