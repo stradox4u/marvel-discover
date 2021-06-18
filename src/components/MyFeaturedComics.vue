@@ -13,15 +13,19 @@
       class="transform hover:scale-105 my-auto"
     ></comic-card>
   </ul>
-  <loading-spinner v-else></loading-spinner>
+  <div v-else class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4">
+    <comic-skeleton v-for="num in 8" :key="num"></comic-skeleton>
+  </div>
 </template>
 
 <script>
 import ComicCard from "./UI/MyComicCard.vue"
+import ComicSkeleton from './UI/MyComicSkeletonLoader.vue'
 
 export default {
   components: {
     ComicCard,
+    ComicSkeleton,
   },
   props: {
     featuredComics: {

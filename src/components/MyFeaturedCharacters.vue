@@ -7,7 +7,9 @@
             >
         </character-card>
     </ul>
-    <loading-spinner v-else></loading-spinner>
+    <div v-else class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <character-skeleton v-for="num in 4" :key="num"></character-skeleton>
+    </div>
 </template>
 
 
@@ -15,11 +17,13 @@
 import { computed } from 'vue'
 
 import CharacterCard from './UI/MyCharacterCard.vue'
+import CharacterSkeleton from './UI/MyCharacterSkeletonLoader.vue'
 
 
 export default {
     components: {
         CharacterCard,
+        CharacterSkeleton,
     },
     props: {
         featuredItems: {
