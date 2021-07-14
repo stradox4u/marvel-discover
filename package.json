@@ -4,9 +4,8 @@
   "scripts": {
     "serve": "vite preview",
     "build": "vite build",
-    "test:unit": "vue-cli-service test:unit",
-    "dev": "vite",
-    "test": "jest"
+    "test": "vue-cli-service test:unit",
+    "dev": "vite"
   },
   "dependencies": {
     "@vue/cli-service": "^5.0.0-beta.2",
