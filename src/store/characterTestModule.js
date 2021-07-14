@@ -7,9 +7,12 @@ export default {
           id: 35423534,
           name: 'Sam Dawson',
           imageLink: 'https://unsplash.com/photos/oX-F7F8UD6s',
-          description: 'Sam is a superhero. Need I say more?',
+          description: '',
           comics: {
             available: 8
+          },
+          events: {
+            available: 0,
           },
           latestComic: {
             date: '2020-08-21'
@@ -22,6 +25,12 @@ export default {
           description: 'Peter is a superhero. Need I say more?',
           comics: {
             available: 6
+          },
+          events: {
+            available: 3,
+            items: [
+              { name: 'Infinity war' }
+            ]
           },
           latestComic: {
             date: '2020-08-21'

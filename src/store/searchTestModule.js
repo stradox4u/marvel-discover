@@ -37,9 +37,15 @@ export default {
     loadLatestComic: jest.fn(),
   },
   getters: {
-    getSearchingState: jest.fn(),
-    getSearchResults: jest.fn(),
-    getNoResultsFoundState: jest.fn()
+    getSearchingState: (state) => {
+      return state.searchingState
+    },
+    getSearchResults: (state) => {
+      return state.searchResults
+    },
+    getNoResultsFoundState: (state) => {
+      return state.noResultsFound
+    }
   },
   mutations: {
     runSearch: jest.fn(),
