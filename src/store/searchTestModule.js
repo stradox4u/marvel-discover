@@ -1,3 +1,5 @@
+import { vi } from 'vitest'
+
 export default {
   namespaced: true,
   state() {
@@ -33,8 +35,8 @@ export default {
     }
   },
   actions: {
-    runSearchQuery: jest.fn(),
-    loadLatestComic: jest.fn(),
+    runSearchQuery: vi.fn(),
+    loadLatestComic: vi.fn(),
   },
   getters: {
     getSearchingState: (state) => {
@@ -48,7 +50,7 @@ export default {
     }
   },
   mutations: {
-    runSearch: jest.fn(),
-    fetchLatestComic: jest.fn()
+    runSearch: vi.fn(),
+    fetchLatestComic: vi.fn()
   },
 }

@@ -1,3 +1,5 @@
+import { vi } from 'vitest'
+
 export default {
   namespaced: true,
   state() {
@@ -32,13 +34,13 @@ export default {
     }
   },
   actions: {
-    loadLatestComics: jest.fn(),
+    loadLatestComics: vi.fn(),
   },
   getters: {
-    getComicsLoadingState: jest.fn(),
-    getLatestComics: jest.fn()
+    getComicsLoadingState: vi.fn(),
+    getLatestComics: vi.fn()
   },
   mutations: {
-    fetchLatestComics: jest.fn()
+    fetchLatestComics: vi.fn()
   },
 }
