@@ -1,12 +1,14 @@
-import { mount } from "@vue/test-utils";
+import { mount } from "@vue/test-utils"
+import { expect, test, vi } from "vitest"
+import { useRoute } from "vue-router"
 
 import store from '../../src/store/testingStore.js'
 import CharacterDetail from '../../src/components/MyCharacterDetail.vue'
 
-jest.mock('vue-router')
+vi.mock('vue-router')
 
 test('name shows up correctly', () => {
-  require('vue-router').useRoute.mockReturnValueOnce({
+  useRoute.mockReturnValueOnce({
     params: {
       charId: 35423535
     }
@@ -21,7 +23,7 @@ test('name shows up correctly', () => {
 })
 
 test('description shows up if present', () => {
-  require('vue-router').useRoute.mockReturnValueOnce({
+  useRoute.mockReturnValueOnce({
     params: {
       charId: 35423535
     }
@@ -36,7 +38,7 @@ test('description shows up if present', () => {
 })
 
 test('description placeholder shows up correctly', () => {
-  require('vue-router').useRoute.mockReturnValueOnce({
+  useRoute.mockReturnValueOnce({
     params: {
       charId: 35423534
     }
@@ -51,7 +53,7 @@ test('description placeholder shows up correctly', () => {
 })
 
 test('description placeholder shows up correctly', () => {
-  require('vue-router').useRoute.mockReturnValueOnce({
+  useRoute.mockReturnValueOnce({
     params: {
       charId: 35423534
     }

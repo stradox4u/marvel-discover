@@ -1,3 +1,5 @@
+import { vi } from 'vitest'
+
 export default {
   namespaced: true,
   state() {
@@ -41,8 +43,8 @@ export default {
     }
   },
   actions: {
-    loadFeaturedCharacters: jest.fn(),
-    loadLatestComic: jest.fn()
+    loadFeaturedCharacters: vi.fn(),
+    loadLatestComic: vi.fn()
   },
   getters: {
     getFeaturedCharacters: (state) => {
@@ -53,7 +55,7 @@ export default {
     }
   },
   mutations: {
-    fetchFeaturedCharacters: jest.fn(),
-    fetchLatestComic: jest.fn()
+    fetchFeaturedCharacters: vi.fn(),
+    fetchLatestComic: vi.fn()
   },
 }

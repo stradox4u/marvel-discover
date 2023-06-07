@@ -1,4 +1,5 @@
 import { mount } from '@vue/test-utils'
+import { expect, test } from 'vitest'
 
 import store from '../../src/store/testingStore.js'
 import FeaturedCharacters from '../../src/components/MyFeaturedCharacters.vue'
